@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - AgriConnect </title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body class="auth-page">
+    
+    <!-- Fond décoratif avec effet de profondeur -->
+    <div class="auth-background">
+        <div class="auth-blob blob-1"></div>
+        <div class="auth-blob blob-2"></div>
+        <div class="auth-blob blob-3"></div>
+    </div>
+
+    <!-- Carte de connexion centrée -->
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            
+            <!-- Logo et titre -->
+            <div class="auth-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                    <div class="logo-circle">
+                        <img src="assets/images/logo.png.png" 
+                             alt="AgriConnect Bouaké" 
+                             class="logo-image"
+                             onerror="this.src='https://via.placeholder.com/80x80/2d5016/ffffff?text=🌿'">
+                    </div>
+                    <h1 class="auth-title">AgriConnect Bouaké</h1>
+                </a>
+                <p class="auth-subtitle">🌿 Bienvenue ! Connectez-vous à votre compte</p>
+            </div>
+
+            <!-- Formulaire élégant -->
+            <form id="loginForm" class="auth-form">
+                <div class="input-group">
+                    <div class="input-icon">📧</div>
+                    <input type="email" id="email" name="email" 
+                           class="auth-input" 
+                           placeholder="Adresse email" required>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">🔒</div>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" 
+                           class="auth-input" 
+                           placeholder="Mot de passe" required>
+                </div>
+
+                <div class="auth-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Se souvenir de moi
+                    </label>
+                    <a href="#" class="forgot-link" onclick="showForgotPasswordModal(); return false;">Mot de passe oublié ?</a>
+                </div>
+
+                <button type="submit" class="auth-button">
+                    <span class="button-text">Se connecter</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </form>
+
+            <!-- Séparateur stylisé -->
+            <div class="separator">
+                <span class="separator-text">ou</span>
+            </div>
+
+            <!-- Lien vers inscription -->
+            <div class="auth-switch">
+                <p>Nouveau sur AgriConnect ?</p>
+                <a href="register.html" class="switch-link" style="display: inline-block; margin-top: 8px;">
+                    Créer un compte
+                </a>
+            </div>
+    </div>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/auth-guard.js"></script>
+    <script>
+        // Vérifier si l'utilisateur est déjà connecté et rediriger
+        document.addEventListener('DOMContentLoaded', function() {
+            requireGuest();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+/* FICHIER : styles/livreur.css */
+/* BUT : Styles professionnels pour le dashboard livreur */
+
+/* ========== VARIABLES ========== */
+:root {
+    --livreur-primary: #2d5016;
+    --livreur-secondary: #4a7c3a;
+    --livreur-accent: #8bc34a;
+    --livreur-warning: #f39c12;
+    --livreur-success: #27ae60;
+    --livreur-error: #e74c3c;
+    --livreur-bg: #f8fafc;
+    --livreur-card-bg: #ffffff;
+    --livreur-text: #2c3e50;
+    --livreur-text-light: #7f8c8d;
+    --livreur-border: #e1e8ed;
+    --livreur-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --livreur-radius: 16px;
+    --livreur-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== STRUCTURE PRINCIPALE ========== */
+.dashboard-main-livreur {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+    background: linear-gradient(135deg, var(--livreur-bg) 0%, #f1f8e9 100%);
+    padding: 40px 20px;
+}
+
+/* En-tête */
+.dashboard-header-livreur {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px;
+    background: linear-gradient(135deg, var(--livreur-card-bg) 0%, #f8fff8 100%);
+    border-radius: var(--livreur-radius);
+    box-shadow: var(--livreur-shadow);
+    border: 1px solid var(--livreur-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header-livreur::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--livreur-primary), var(--livreur-accent));
+}
+
+.dashboard-header-livreur h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--livreur-primary);
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--livreur-primary), var(--livreur-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dashboard-header-livreur p {
+    font-size: 1.3rem;
+    color: var(--livreur-text-light);
+    font-weight: 500;
+}
+
+/* Grille de statistiques */
+.stats-grid-livreur {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.stat-card-livreur {
+    background: var(--livreur-card-bg);
+    padding: 30px;
+    border-radius: var(--livreur-radius);
+    box-shadow: var(--livreur-shadow);
+    border: 1px solid var(--livreur-border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: var(--livreur-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-livreur::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--livreur-primary), var(--livreur-accent));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+}
+
+.stat-card-livreur:hover::before {
+    transform: scaleY(1);
+}
+
+.stat-card-livreur:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 45px rgba(45, 80, 22, 0.2);
+    border-color: var(--livreur-secondary);
+}
+
+.stat-card-livreur:hover::before {
+    opacity: 1;
+}
+
+.stat-card-livreur.primary {
+    border-left: 4px solid var(--livreur-primary);
+}
+
+.stat-card-livreur.success {
+    border-left: 4px solid var(--livreur-success);
+}
+
+.stat-card-livreur.warning {
+    border-left: 4px solid var(--livreur-warning);
+}
+
+.stat-card-livreur.info {
+    border-left: 4px solid var(--livreur-accent);
+}
+
+.stat-icon-livreur {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--livreur-primary), var(--livreur-secondary));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+}
+
+.stat-card-livreur.success .stat-icon-livreur {
+    background: linear-gradient(135deg, var(--livreur-success), #2ecc71);
+}
+
+.stat-card-livreur.warning .stat-icon-livreur {
+    background: linear-gradient(135deg, var(--livreur-warning), #f1c40f);
+}
+
+.stat-card-livreur.info .stat-icon-livreur {
+    background: linear-gradient(135deg, var(--livreur-accent), #9b59b6);
+}
+
+.stat-content-livreur h3 {
+    font-size: 14px;
+    color: var(--livreur-text-light);
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value-livreur {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--livreur-text);
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.stat-trend-livreur {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.stat-trend-livreur.positive {
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--livreur-success);
+}
+
+.stat-trend-livreur.negative {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--livreur-error);
+}
+
+/* Contenu principal */
+.dashboard-content-livreur {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.dashboard-section-livreur {
+    background: var(--livreur-card-bg);
+    border-radius: var(--livreur-radius);
+    box-shadow: var(--livreur-shadow);
+    border: 1px solid var(--livreur-border);
+    overflow: hidden;
+}
+
+.section-header-livreur {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, #f8fff8, #ffffff);
+    border-bottom: 1px solid var(--livreur-border);
+}
+
+.section-header-livreur h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--livreur-primary);
+    margin: 0;
+}
+
+.badge-livreur {
+    background: linear-gradient(135deg, var(--livreur-primary), var(--livreur-secondary));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+/* Cartes de livraison */
+.livraisons-container, .historique-container {
+    padding: 25px 30px;
+}
+
+.livraison-card-livreur {
+    background: var(--livreur-card-bg);
+    border: 2px solid var(--livreur-border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    transition: var(--livreur-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.livraison-card-livreur::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--livreur-primary);
+    transition: var(--livreur-transition);
+}
+
+.livraison-card-livreur:hover {
+    border-color: var(--livreur-secondary);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.livraison-card-livreur.urgent::before {
+    background: var(--livreur-error);
+}
+
+.livraison-card-livreur.en-cours::before {
+    background: var(--livreur-warning);
+}
+
+.livraison-card-livreur.termine::before {
+    background: var(--livreur-success);
+}
+
+.livraison-header-livreur {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.livraison-info-livreur h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--livreur-primary);
+    margin-bottom: 8px;
+}
+
+.livraison-info-livreur p {
+    color: var(--livreur-text-light);
+    margin: 0;
+    font-weight: 500;
+}
+
+.livraison-status-livreur {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-en-attente {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--livreur-warning);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.status-en-cours {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196f3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.status-termine {
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--livreur-success);
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.livraison-details-livreur {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: 10px;
+}
+
+.detail-item-livreur {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-label-livreur {
+    font-weight: 700;
+    color: var(--livreur-text);
+    font-size: 0.9rem;
+}
+
+.detail-value-livreur {
+    color: var(--livreur-text-light);
+    font-weight: 500;
+}
+
+.produits-list-livreur {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--livreur-border);
+    margin-bottom: 20px;
+}
+
+.produits-list-livreur strong {
+    color: var(--livreur-primary);
+}
+
+.livraison-actions-livreur {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Carte vide */
+.empty-state-livreur {
+    text-align: center;
+    padding: 60px 40px;
+    color: var(--livreur-text-light);
+}
+
+.empty-state-livreur .icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.empty-state-livreur h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--livreur-text);
+}
+
+.empty-state-livreur p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* ========== RESPONSIVE ========== */
+
+/* Tablettes (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .dashboard-main-livreur {
+        padding: 25px 1.5rem;
+    }
+    
+    .stats-grid-livreur {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .livraison-details-livreur {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobiles et petites tablettes (max-width: 768px) */
+@media (max-width: 768px) {
+    .dashboard-main-livreur {
+        padding: 20px 15px;
+        margin-top: 70px;
+    }
+    
+    .dashboard-header-livreur {
+        padding: 30px 20px;
+    }
+    
+    .dashboard-header-livreur h1 {
+        font-size: 2.2rem;
+    }
+    
+    .stats-grid-livreur {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .stat-card-livreur {
+        padding: 25px;
+    }
+    
+    .stat-icon-livreur {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .livraison-header-livreur {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .livraison-details-livreur {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .livraison-actions-livreur {
+        justify-content: stretch;
+    }
+    
+    .livraison-actions-livreur .btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header-livreur h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-header-livreur {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .stat-value-livreur {
+        font-size: 2rem;
+    }
+}

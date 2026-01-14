@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - AgriConnect Bouaké</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body class="auth-page">
+    
+    <!-- Fond décoratif -->
+    <div class="auth-background">
+        <div class="auth-blob blob-1"></div>
+        <div class="auth-blob blob-2"></div>
+        <div class="auth-blob blob-3"></div>
+    </div>
+
+    <!-- Carte d'inscription centrée -->
+    <div class="auth-wrapper">
+        <div class="auth-container register-container">
+            
+            <!-- Logo et titre -->
+            <div class="auth-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                    <div class="logo-circle">
+                        <img src="assets/images/logo.png.png" 
+                             alt="AgriConnect Bouaké" 
+                             class="logo-image"
+                             onerror="this.src='https://via.placeholder.com/80x80/2d5016/ffffff?text=🌿'">
+                    </div>
+                    <h1 class="auth-title">Rejoignez AgriConnect 🌿</h1>
+                </a>
+                <p class="auth-subtitle">✨ Créez votre compte en 2 minutes et commencez votre aventure agricole !</p>
+            </div>
+
+            <!-- Formulaire d'inscription -->
+            <form id="registerForm" class="auth-form">
+                
+                <!-- Ligne Nom/Prénom -->
+                <div class="form-row">
+                    <div class="input-group">
+                        <div class="input-icon">👤</div>
+                        <input type="text" id="prenom" name="prenom" 
+                               class="auth-input" 
+                               placeholder="Prénom" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="nom" name="nom" 
+                               class="auth-input" 
+                               placeholder="Nom" required>
+                    </div>
+                </div>
+
+                <!-- Email et Téléphone -->
+                <div class="input-group">
+                    <div class="input-icon">📧</div>
+                    <input type="email" id="email" name="email" 
+                           class="auth-input" 
+                           placeholder="Adresse email" required>
+                </div>
+
+                <!-- Téléphone (Côte d'Ivoire uniquement) -->
+                <div class="input-group">
+                    <div class="input-icon">📱</div>
+                    <input type="tel" id="telephone" name="telephone" 
+                           class="auth-input" 
+                           placeholder="Numéro de téléphone (Ex: 0712345678)" required>
+                    <small style="color: #7f8c8d; font-size: 0.75rem; margin-top: 3px; display: block;">
+                        📍 Côte d'Ivoire uniquement (+225)
+                    </small>
+                </div>
+
+                <!-- Rôle et Commune -->
+                <div class="form-row">
+                    <div class="input-group">
+                        <div class="input-icon">🎯</div>
+                        <select id="role" name="role" class="auth-input" required onchange="toggleAdminCode()">
+                            <option value="">Je suis...</option>
+                            <option value="ACHETEUR">🛒 Acheteur</option>
+                            <option value="PRODUCTEUR">👨‍🌾 Producteur</option>
+                            <option value="LIVREUR">🚚 Livreur</option>
+                            <option value="ADMIN">⚙️ Administrateur</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-icon">📍</div>
+                        <select id="commune" name="commune" class="auth-input" required>
+                            <option value="">Ma commune</option>
+                            <option value="Bouaké-Ville">Bouaké-Ville</option>
+                            <option value="Bounda">Bounda</option>
+                            <option value="Brobo">Brobo</option>
+                            <option value="Djébonoua">Djébonoua</option>
+                            <option value="Sakassou">Sakassou</option>
+                            <option value="Béoumi">Béoumi</option>
+                            <option value="Botro">Botro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Code Admin (affiché uniquement si ADMIN est sélectionné) -->
+                <div class="input-group" id="adminCodeGroup" style="display: none;">
+                    <div class="input-icon">🔐</div>
+                    <input type="password" id="admin_code" name="admin_code" 
+                           class="auth-input" 
+                           placeholder="Code secret administrateur (requis)">
+                    <small style="color: #7f8c8d; font-size: 0.85rem; margin-top: 5px; display: block;">
+                        ⚠️ Un code secret est requis pour créer un compte administrateur
+                    </small>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="form-row">
+                    <div class="input-group">
+                        <div class="input-icon">🔒</div>
+                        <input type="password" id="mot_de_passe" name="mot_de_passe" 
+                               class="auth-input" 
+                               placeholder="Mot de passe" required minlength="6">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-icon">✅</div>
+                        <input type="password" id="confirmation_mdp" name="confirmation_mdp" 
+                               class="auth-input" 
+                               placeholder="Confirmer le mot de passe" required>
+                    </div>
+                </div>
+
+                <!-- Conditions -->
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <span class="checkmark"></span>
+                        J'accepte les <a href="#" class="text-link">conditions d'utilisation</a>
+                    </label>
+                </div>
+
+                <!-- Bouton d'inscription -->
+                <button type="submit" class="auth-button register-button">
+                    <span class="button-text">Créer mon compte</span>
+                    <span class="button-icon">🎉</span>
+                </button>
+            </form>
+
+            <!-- Lien vers connexion -->
+            <div class="auth-switch">
+                <p>Déjà un compte ?</p>
+                <a href="login.html" class="switch-link" style="display: inline-block; margin-top: 8px;">
+                    Se connecter
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/auth-guard.js"></script>
+    <script>
+        // Fonction pour afficher/masquer le champ code admin
+        function toggleAdminCode() {
+            const roleSelect = document.getElementById('role');
+            const adminCodeGroup = document.getElementById('adminCodeGroup');
+            const adminCodeInput = document.getElementById('admin_code');
+            
+            if (roleSelect.value === 'ADMIN') {
+                adminCodeGroup.style.display = 'block';
+                adminCodeInput.required = true;
+            } else {
+                adminCodeGroup.style.display = 'none';
+                adminCodeInput.required = false;
+                adminCodeInput.value = '';
+            }
+        }
+        
+        // Vérifier si l'utilisateur est déjà connecté et rediriger
+        document.addEventListener('DOMContentLoaded', function() {
+            requireGuest();
+        });
+    </script>
+</body>
+</html>

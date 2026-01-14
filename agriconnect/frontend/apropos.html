@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - AgriConnect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/apropos.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect Logo" class="logo">
+                    <h2>AgriConnect</h2>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="catalogue.html" class="nav-link">Catalogue</a>
+                <a href="apropos.html" class="nav-link active">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <div class="nav-auth" id="navAuth">
+                    <button onclick="redirectToLogin()" class="btn btn-outline">Connexion</button>
+                    <button onclick="redirectToRegister()" class="btn btn-primary">Inscription</button>
+                </div>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section À propos -->
+    <section class="apropos-section">
+        <div class="container">
+            <div class="apropos-header">
+                <h1>🌾 À propos d'AgriConnect</h1>
+                <p class="section-description">Notre mission est de connecter les producteurs locaux aux acheteurs dans la région de Bouaké</p>
+            </div>
+
+            <div class="apropos-content">
+                <!-- Notre histoire -->
+                <div class="content-block">
+                    <h2>📖 Notre Histoire</h2>
+                    <p>AgriConnect est née d'une volonté de faciliter l'accès aux produits agricoles locaux de qualité dans la région de Bouaké. Fondée en 2024, notre plateforme vise à créer un pont entre les producteurs locaux et les consommateurs, tout en soutenant l'économie locale.</p>
+                    <p>Nous croyons fermement que chaque producteur mérite d'avoir accès à un marché équitable et que chaque consommateur devrait pouvoir accéder facilement aux meilleurs produits locaux.</p>
+                </div>
+
+                <!-- Notre mission -->
+                <div class="content-block">
+                    <h2>🎯 Notre Mission</h2>
+                    <div class="mission-grid">
+                        <div class="mission-card">
+                            <div class="mission-icon">🌱</div>
+                            <h3>Soutenir les producteurs</h3>
+                            <p>Offrir aux producteurs locaux une plateforme pour vendre leurs produits directement aux consommateurs</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon">🛒</div>
+                            <h3>Faciliter l'achat</h3>
+                            <p>Permettre aux consommateurs d'accéder facilement aux produits frais et locaux</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon">🤝</div>
+                            <h3>Créer des liens</h3>
+                            <p>Établir des relations durables entre producteurs et consommateurs dans la région</p>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-icon">💚</div>
+                            <h3>Promouvoir le local</h3>
+                            <p>Encourager la consommation de produits locaux pour soutenir l'économie régionale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nos valeurs -->
+                <div class="content-block">
+                    <h2>💎 Nos Valeurs</h2>
+                    <ul class="values-list">
+                        <li><strong>Transparence :</strong> Nous croyons en la transparence totale dans toutes nos transactions</li>
+                        <li><strong>Qualité :</strong> Nous nous engageons à offrir uniquement des produits de qualité supérieure</li>
+                        <li><strong>Équité :</strong> Nous garantissons des prix équitables pour les producteurs et les consommateurs</li>
+                        <li><strong>Innovation :</strong> Nous utilisons la technologie pour améliorer l'expérience de tous</li>
+                        <li><strong>Communauté :</strong> Nous construisons une communauté solidaire autour de l'agriculture locale</li>
+                    </ul>
+                </div>
+
+                <!-- Notre équipe -->
+                <div class="content-block">
+                    <h2>👥 Notre Équipe</h2>
+                    <p>Notre équipe est composée de passionnés de l'agriculture et de la technologie, dédiés à faire d'AgriConnect la référence en matière de commerce agricole local à Bouaké.</p>
+                    <p>Nous travaillons en étroite collaboration avec les producteurs locaux pour comprendre leurs besoins et améliorer continuellement notre plateforme.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect" class="footer-logo">
+                    <p>Plateforme de mise en relation agricole à Bouaké</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <a href="catalogue.html">Catalogue</a>
+                    <a href="apropos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Communes</h4>
+                    <span>Bouaké-Ville</span>
+                    <span>Bounda</span>
+                    <span>Brobo</span>
+                    <span>Djébonoua</span>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 +225 07 19 19 19 74</p>
+                    <p>📧 contact@agriconnect.ci</p>
+                    <p>📍 Bouaké, Vallée du Bandama</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgriConnect Bouaké. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
+

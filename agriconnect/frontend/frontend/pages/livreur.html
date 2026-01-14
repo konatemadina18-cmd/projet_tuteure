@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Livreur - AgriConnect </title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/livreur.css">
+    <link rel="stylesheet" href="../../styles/messages.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../../assets/images/logo.png.png" alt="AgriConnect Logo" class="logo" style="height: 80px; width: auto;">
+                <h2>AgriConnect</h2>
+            </div>
+            <div class="nav-auth" id="navAuth">
+                <!-- Généré par JavaScript -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Livreur -->
+    <main class="dashboard-main-livreur">
+        <div class="container">
+            <!-- En-tête -->
+            <div class="dashboard-header-livreur">
+                <h1>🚚 Espace Livreur</h1>
+                <p>Gérez vos livraisons et itinéraires en toute simplicité</p>
+            </div>
+            
+            <!-- Statistiques -->
+            <div class="stats-grid-livreur" id="statsGrid">
+                <!-- Généré par JavaScript -->
+            </div>
+
+            <!-- Section principale -->
+            <div class="dashboard-content-livreur">
+                <!-- Livraisons en cours -->
+                <section class="dashboard-section-livreur">
+                    <div class="section-header-livreur">
+                        <h2>📦 Livraisons en cours</h2>
+                        <span class="badge-livreur" id="badgeLivraisons">0</span>
+                    </div>
+                    <div class="livraisons-container" id="livraisonsList">
+                        <!-- Généré par JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Historique -->
+                <section class="dashboard-section-livreur">
+                    <div class="section-header-livreur">
+                        <h2>📋 Historique des livraisons</h2>
+                        <span class="badge-livreur">12</span>
+                    </div>
+                    <div class="historique-container" id="historiqueList">
+                        <!-- Généré par JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Section Profil -->
+                <section class="dashboard-section-livreur">
+                    <div class="section-header-livreur">
+                        <h2>👤 Mon Profil</h2>
+                        <p style="color: #7f8c8d; font-size: 0.95rem; margin-top: 5px;">Gérez vos informations personnelles</p>
+                    </div>
+                    <div id="profilContent" style="padding: 20px;">
+                        <!-- Les informations du profil seront chargées ici -->
+                    </div>
+                </section>
+
+                <!-- Section Messages -->
+                <section class="dashboard-section-livreur">
+                    <div class="section-header">
+                        <h1>💬 Messages</h1>
+                        <p>Vos conversations avec les autres utilisateurs</p>
+                    </div>
+                    <div id="messagesContent" class="messages-container">
+                        <!-- Liste des conversations -->
+                        <div class="conversations-list">
+                            <div class="conversations-header">
+                                <h3>Conversations</h3>
+                                <button class="btn-icon" onclick="loadConversations()" title="Actualiser">
+                                    🔄
+                                </button>
+                            </div>
+                            <div id="conversationsList" class="conversations-items">
+                                <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                    Chargement des conversations...
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Zone de dialogue -->
+                        <div class="chat-area">
+                            <!-- En-tête de la conversation -->
+                            <div class="chat-header" id="chatHeader">
+                                <div class="chat-header-info">
+                                    <div class="chat-avatar">👤</div>
+                                    <div>
+                                        <h3 id="chatUserName">Sélectionnez une conversation</h3>
+                                        <p id="chatUserRole" class="chat-subtitle">Utilisateur</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Messages -->
+                            <div class="messages-area" id="messagesArea">
+                                <div class="messages-empty">
+                                    <div class="empty-icon">💬</div>
+                                    <p>Sélectionnez une conversation pour commencer</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Zone de saisie -->
+                            <div class="message-input-container" id="messageInputContainer" style="display: none; padding: 15px; border-top: 1px solid #e0e0e0; background: white;">
+                                <!-- Barre d'outils -->
+                                <div class="message-input-toolbar" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <button class="btn-toolbar" onclick="triggerImageInput()" title="Envoyer une image" style="background: none; border: 1px solid #ddd; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 18px;">
+                                        📷
+                                    </button>
+                                    <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+                                </div>
+                                
+                                <!-- Aperçu image -->
+                                <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                                    <div class="image-preview-wrapper">
+                                        <img id="imagePreview" src="" alt="Aperçu">
+                                        <button class="btn-remove-preview" onclick="removeImagePreview()">×</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Zone de texte -->
+                                <div class="message-input-wrapper">
+                                    <textarea 
+                                        id="messageText" 
+                                        placeholder="Tapez votre message..." 
+                                        rows="1"
+                                        onkeydown="handleMessageKeydown(event)"
+                                        oninput="autoResizeTextarea(this)">
+                                    </textarea>
+                                    <button class="btn-send-message" onclick="sendMessage()" title="Envoyer">
+                                        ➤
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/app.js"></script>
+    <script src="../../scripts/auth.js"></script>
+    <script src="../../scripts/messaging.js"></script>
+    <script src="../../scripts/livreur.js"></script>
+</body>
+</html>

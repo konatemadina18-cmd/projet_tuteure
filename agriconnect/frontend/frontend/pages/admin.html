@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrateur - AgriConnect</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/dashboard.css">
+    <link rel="stylesheet" href="../../styles/admin.css">
+</head>
+
+<body class="dashboard-page admin-page">
+    <nav class="dashboard-nav admin-nav">
+        <div class="nav-brand">
+            <img src="../../assets/images/logo.png.png" alt="AgriConnect" class="nav-logo">
+            <span class="brand-text">AgriConnect Admin</span>
+        </div>
+
+        <div class="nav-user">
+            <div class="user-avatar">⚙️</div>
+            <div class="user-info">
+                <span class="user-name" id="adminName">Administrateur</span>
+                <span class="user-role">Admin</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout admin-layout">
+        <aside class="dashboard-sidebar admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="../../index.html" class="nav-item"
+                    style="background: #f8f9fa; color: #4a7c3a; border-left: 3px solid #4a7c3a;">
+                    🏠 Revenir à l'accueil
+                </a>
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    📊 Tableau de bord
+                </a>
+                <a href="#utilisateurs" class="nav-item" data-section="utilisateurs">
+                    👥 Utilisateurs
+                </a>
+                <a href="#producteurs" class="nav-item" data-section="producteurs">
+                    👨‍🌾 Producteurs
+                </a>
+                <a href="#acheteurs" class="nav-item" data-section="acheteurs">
+                    🛒 Acheteurs
+                </a>
+                <a href="#livreurs" class="nav-item" data-section="livreurs">
+                    🚚 Livreurs
+                </a>
+                <a href="#commandes" class="nav-item" data-section="commandes">
+                    📦 Commandes
+                </a>
+                <a href="#produits" class="nav-item" data-section="produits">
+                    🍅 Produits
+                </a>
+                <a href="#notifications" class="nav-item" data-section="notifications">
+                    🔔 Notifications <span id="notificationsBadge"
+                        style="background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: none; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-left: 5px;">0</span>
+                </a>
+                <a href="#messages" class="nav-item" data-section="messages">
+                    💬 Messages/Plaintes
+                </a>
+                <a href="#statistiques" class="nav-item" data-section="statistiques">
+                    📈 Statistiques
+                </a>
+                <a href="#parametres" class="nav-item" data-section="parametres">
+                    ⚙️ Paramètres
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="logout-btn">
+                    🚪 Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main admin-main">
+            <!-- Section Dashboard Principal -->
+            <section id="dashboard" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>📊 Tableau de Bord Administrateur</h1>
+                    <p>Vue d'ensemble de la plateforme AgriConnect</p>
+                </div>
+
+                <!-- Statistiques globales -->
+                <div class="stats-grid admin-stats">
+                    <div class="stat-card admin-stat primary">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Utilisateurs totaux</h3>
+                            <div class="stat-value" id="totalUsers">0</div>
+                            <div class="stat-trend" id="usersTrend">Chargement...</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card admin-stat success">
+                        <div class="stat-icon">👨‍🌾</div>
+                        <div class="stat-content">
+                            <h3>Producteurs actifs</h3>
+                            <div class="stat-value" id="totalProducers">0</div>
+                            <div class="stat-trend" id="producersTrend">Chargement...</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card admin-stat warning">
+                        <div class="stat-icon">🛒</div>
+                        <div class="stat-content">
+                            <h3>Acheteurs actifs</h3>
+                            <div class="stat-value" id="totalBuyers">0</div>
+                            <div class="stat-trend" id="buyersTrend">Chargement...</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card admin-stat info">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-content">
+                            <h3>Commandes totales</h3>
+                            <div class="stat-value" id="totalOrders">0</div>
+                            <div class="stat-trend" id="ordersTrend">Chargement...</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card admin-stat danger">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Chiffre d'affaires</h3>
+                            <div class="stat-value" id="totalRevenue">0 FCFA</div>
+                            <div class="stat-trend" id="revenueTrend">Chargement...</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card admin-stat secondary">
+                        <div class="stat-icon">🔔</div>
+                        <div class="stat-content">
+                            <h3>Notifications</h3>
+                            <div class="stat-value" id="totalNotifications">0</div>
+                            <div class="stat-trend" id="notificationsTrend">Non lues</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphiques et activités récentes -->
+                <div class="admin-dashboard-grid">
+                    <div class="admin-card">
+                        <h3>📈 Activité récente</h3>
+                        <div id="recentActivity">
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">Chargement...</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3>⚠️ Alertes importantes</h3>
+                        <div id="alertsList">
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">Aucune alerte</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Utilisateurs -->
+            <section id="utilisateurs" class="dashboard-section">
+                <div class="section-header">
+                    <h1>👥 Gestion des Utilisateurs</h1>
+                    <p>Gérez tous les utilisateurs de la plateforme</p>
+                </div>
+                <div id="utilisateursContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Producteurs -->
+            <section id="producteurs" class="dashboard-section">
+                <div class="section-header">
+                    <h1>👨‍🌾 Gestion des Producteurs</h1>
+                    <p>Liste et gestion des producteurs actifs</p>
+                </div>
+                <div id="producteursContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Acheteurs -->
+            <section id="acheteurs" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🛒 Gestion des Acheteurs</h1>
+                    <p>Liste et statistiques des acheteurs</p>
+                </div>
+                <div id="acheteursContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Livreurs -->
+            <section id="livreurs" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🚚 Gestion des Livreurs</h1>
+                    <p>Liste et statistiques des livreurs inscrits</p>
+                </div>
+                <div id="livreursContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Commandes -->
+            <section id="commandes" class="dashboard-section">
+                <div class="section-header">
+                    <h1>📦 Gestion des Commandes</h1>
+                    <p>Toutes les commandes de la plateforme</p>
+                </div>
+                <div id="commandesContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Produits -->
+            <section id="produits" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🍅 Gestion des Produits</h1>
+                    <p>Modération et gestion de tous les produits</p>
+                </div>
+                <div id="produitsContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Notifications -->
+            <section id="notifications" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🔔 Gestion des Notifications</h1>
+                    <p>Notifications système et utilisateurs</p>
+                </div>
+                <div id="notificationsContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Messages/Plaintes -->
+            <section id="messages" class="dashboard-section">
+                <div class="section-header">
+                    <h1>💬 Messages et Plaintes</h1>
+                    <p>Gérez les messages, plaintes et suggestions d'amélioration</p>
+                </div>
+                <div id="messagesContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Statistiques -->
+            <section id="statistiques" class="dashboard-section">
+                <div class="section-header">
+                    <h1>📈 Statistiques Détaillées</h1>
+                    <p>Analyses approfondies de la plateforme</p>
+                </div>
+                <div id="statistiquesContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Paramètres -->
+            <section id="parametres" class="dashboard-section">
+                <div class="section-header">
+                    <h1>⚙️ Paramètres de la Plateforme</h1>
+                    <p>Configuration générale du système</p>
+                </div>
+                <div id="parametresContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modale pour détails produit -->
+    <div id="productModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
+        <div style="background: white; margin: 40px auto; padding: 30px; border-radius: 8px; max-width: 600px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 id="productTitle">Détails du Produit</h2>
+                <button onclick="closeProductModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
+            </div>
+            
+            <div id="productContent">
+                <p style="text-align: center; color: #7f8c8d;">Chargement...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/auth.js"></script>
+    <script src="../../scripts/auth-guard.js"></script>
+    <script src="../../scripts/admin.js"></script>
+</body>
+
+</html>

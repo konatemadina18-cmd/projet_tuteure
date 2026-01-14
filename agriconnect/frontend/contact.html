@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - AgriConnect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/contact.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect Logo" class="logo">
+                    <h2>AgriConnect</h2>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="catalogue.html" class="nav-link">Catalogue</a>
+                <a href="apropos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+                
+                <div class="nav-auth" id="navAuth">
+                    <button onclick="redirectToLogin()" class="btn btn-outline">Connexion</button>
+                    <button onclick="redirectToRegister()" class="btn btn-primary">Inscription</button>
+                </div>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Contact -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h1>📞 Contactez-nous</h1>
+                <p class="section-description">Nous sommes là pour vous aider. N'hésitez pas à nous contacter !</p>
+            </div>
+
+            <div class="contact-content">
+                <!-- Formulaire de contact -->
+                <div class="contact-form-container">
+                    <h2>Envoyez-nous un message</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="+225 07 00 00 00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sujet">Sujet *</label>
+                            <select id="sujet" name="sujet" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="question">Question générale</option>
+                                <option value="produit">Question sur un produit</option>
+                                <option value="commande">Problème avec une commande</option>
+                                <option value="partenaire">Devenir partenaire</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Votre message..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Informations de contact -->
+                <div class="contact-info-container">
+                    <h2>Nos coordonnées</h2>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Adresse</h3>
+                            <p>Bouaké, Vallée du Bandama<br>Côte d'Ivoire</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Téléphone</h3>
+                            <p>+225 07 19 19 19 74</p>
+                            <p>+225 07 79 31 31 83</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>contact@agriconnect.ci</p>
+                            <p>support@agriconnect.ci</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-icon">🕒</div>
+                        <div class="info-content">
+                            <h3>Horaires</h3>
+                            <p>Lundi - Vendredi : 8h - 18h</p>
+                            <p>Samedi : 9h - 16h</p>
+                            <p>Dimanche : Fermé</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect" class="footer-logo">
+                    <p>Plateforme de mise en relation agricole à Bouaké</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <a href="catalogue.html">Catalogue</a>
+                    <a href="apropos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Communes</h4>
+                    <span>Bouaké-Ville</span>
+                    <span>Bounda</span>
+                    <span>Brobo</span>
+                    <span>Djébonoua</span>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 +225 07 00 00 00</p>
+                    <p>📧 contact@agriconnect.ci</p>
+                    <p>📍 Bouaké, Vallée du Bandama</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgriConnect Bouaké. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/contact.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - AgriConnect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/catalogue.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect Logo" class="logo">
+                    <h2>AgriConnect</h2>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="catalogue.html" class="nav-link active">Catalogue</a>
+                <a href="apropos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <div class="nav-auth" id="navAuth">
+                    <button onclick="redirectToLogin()" class="btn btn-outline">Connexion</button>
+                    <button onclick="redirectToRegister()" class="btn btn-primary">Inscription</button>
+                </div>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Catalogue -->
+    <section class="catalogue-section">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="catalogue-header" style="flex: 1;">
+                    <h1>🛒 Catalogue des Produits</h1>
+                    <p class="section-description">Découvrez tous nos produits locaux de qualité</p>
+                </div>
+                <button id="backToDashboardBtn" onclick="backToDashboard()" style="display: none; background: #2d5016; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; white-space: nowrap; margin-left: 20px;">
+                    ← Retour au tableau de bord
+                </button>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filters-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Rechercher un produit..." class="search-input">
+                </div>
+                <div class="filter-group">
+                    <select id="filterCommune" class="filter-select">
+                        <option value="">Toutes les communes</option>
+                        <option value="Bouaké-Ville">Bouaké-Ville</option>
+                        <option value="Bounda">Bounda</option>
+                        <option value="Brobo">Brobo</option>
+                        <option value="Djébonoua">Djébonoua</option>
+                    </select>
+                    <select id="filterCategorie" class="filter-select">
+                        <option value="">Toutes les catégories</option>
+                        <option value="Légumes">Légumes</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Céréales">Céréales</option>
+                        <option value="Tubercules">Tubercules</option>
+                        <option value="Oléagineux">Oléagineux</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grille de produits -->
+            <div class="products-grid" id="productsGrid">
+                <div class="loading-message">Chargement des produits...</div>
+            </div>
+        </div>
+
+        <!-- Icône panier flottante -->
+        <div class="floating-cart" onclick="goToCart()">
+            <div class="cart-icon-floating">🛒</div>
+            <div class="cart-counter-floating" id="floatingCartCounter" style="display: none;">0</div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect" class="footer-logo">
+                    <p>Plateforme de mise en relation agricole à Bouaké</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <a href="catalogue.html">Catalogue</a>
+                    <a href="apropos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Communes</h4>
+                    <span>Bouaké-Ville</span>
+                    <span>Bounda</span>
+                    <span>Brobo</span>
+                    <span>Djébonoua</span>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 +225 07 19 19 19 74</p>
+                    <p>📧 contact@agriconnect.ci</p>
+                    <p>📍 Bouaké, Vallée du Bandama</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgriConnect Bouaké. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/catalogue.js"></script>
+    <script>
+        // Fonction pour rediriger vers le panier directement
+        function goToCart() {
+            const userData = localStorage.getItem('agriConnect_user');
+            if (userData) {
+                // Rediriger directement vers le panier
+                window.location.href = 'panier.html';
+            } else {
+                // Si non connecté, rediriger vers login
+                if (typeof redirectToLogin === 'function') {
+                    redirectToLogin();
+                } else {
+                    window.location.href = 'login.html';
+                }
+            }
+        }
+        
+        // Vérifier l'authentification pour certaines actions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Le catalogue peut être vu sans être connecté
+            // Mais certaines actions nécessitent une connexion
+            const userData = localStorage.getItem('agriConnect_user');
+            if (!userData) {
+                console.log('ℹ️ Connectez-vous pour passer commande');
+            } else {
+                // Si c'est un admin qui vient du tableau de bord, afficher le bouton retour
+                const userObj = JSON.parse(userData);
+                if (userObj.role === 'ADMIN') {
+                    const backBtn = document.getElementById('backToDashboardBtn');
+                    if (backBtn) {
+                        backBtn.style.display = 'block';
+                    }
+                }
+            }
+        });
+        
+        function backToDashboard() {
+            window.location.href = 'frontend/pages/admin.html';
+        }
+    </script>
+</body>
+</html>
+

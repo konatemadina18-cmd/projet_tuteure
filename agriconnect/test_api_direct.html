@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API Admin</title>
+</head>
+<body>
+    <h1>Test API Admin</h1>
+    <div id="results"></div>
+    
+    <script>
+        const API_BASE = 'http://localhost/agriconnect2/agriconnect/api';
+        
+        async function testAPI() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Test en cours...</p>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin/get_all_users.php`);
+                console.log('Response status:', response.status);
+                console.log('Response type:', response.type);
+                
+                const text = await response.text();
+                console.log('Response text:', text);
+                
+                const data = JSON.parse(text);
+                console.log('Data:', data);
+                
+                resultsDiv.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = '<p style="color: red;">Erreur: ' + error.message + '</p>';
+            }
+        }
+        
+        // Test au chargement
+        window.addEventListener('load', testAPI);
+    </script>
+</body>
+</html>

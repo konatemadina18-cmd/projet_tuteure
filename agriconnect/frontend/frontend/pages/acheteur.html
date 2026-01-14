@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Acheteur - AgriConnect</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/dashboard.css">
+    <link rel="stylesheet" href="../../styles/messages.css">
+</head>
+<body class="dashboard-page">
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <img src="../../assets/images/logo.png.png" 
+                 alt="AgriConnect " 
+                 class="nav-logo">
+            <span class="brand-text">AgriConnect</span>
+        </div>
+        
+        <div class="nav-user">
+            <div class="user-avatar">🛒</div>
+            <div class="user-info">
+                <span class="user-name" id="userName">Chargement...</span>
+                <span class="user-role">Acheteur</span>
+            </div>
+            <!-- Icône panier avec compteur -->
+            <div class="cart-icon-wrapper" onclick="showSection('panier')" style="margin-left: 15px; cursor: pointer; position: relative;">
+                <span style="font-size: 24px;">🛒</span>
+                <span id="cartBadge" style="position: absolute; top: -5px; right: -5px; background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: none; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="../../index.html" class="nav-item" style="background: #f8f9fa; color: #4a7c3a; border-left: 3px solid #4a7c3a;">
+                    🏠 Revenir à l'accueil
+                </a>
+                <a href="#accueil" class="nav-item active" data-section="accueil">
+                    📊 Accueil Dashboard
+                </a>
+                <a href="../../catalogue.html" class="nav-item" onclick="event.preventDefault(); window.location.href='../../catalogue.html';">
+                    🔍 Rechercher / Catalogue
+                </a>
+                <a href="#favoris" class="nav-item" data-section="favoris">
+                    ❤️ Mes favoris
+                </a>
+                <a href="#panier" class="nav-item" data-section="panier">
+                    🛒 Mon panier
+                </a>
+                <a href="#commandes" class="nav-item" data-section="commandes">
+                    📦 Mes commandes <span id="ordersBadge" style="background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: none; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-left: 5px;">0</span>
+                </a>
+                <a href="#messages" class="nav-item" data-section="messages">
+                    💬 Messages
+                </a>
+                <a href="#notifications" class="nav-item" data-section="notifications">
+                    🔔 Notifications <span id="notificationsBadge" style="background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: none; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-left: 5px;">0</span>
+                </a>
+                <a href="#mon-profil" class="nav-item" data-section="mon-profil">
+                    👤 Mon profil
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="logout-btn">
+                    🚪 Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <!-- Section Accueil Acheteur -->
+            <section id="accueil" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>Bienvenue sur votre espace Acheteur</h1>
+                    <p>Découvrez les meilleurs produits locaux de Bouaké</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-content">
+                            <h3>Commandes totales</h3>
+                            <div class="stat-value">24</div>
+                            <div class="stat-trend positive">+3 ce mois</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card success">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Dépense totale</h3>
+                            <div class="stat-value">156,000 FCFA</div>
+                            <div class="stat-trend">Moyenne: 6,500 FCFA</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card warning">
+                        <div class="stat-icon">🚚</div>
+                        <div class="stat-content">
+                            <h3>En livraison</h3>
+                            <div class="stat-value">2</div>
+                            <div class="stat-trend">Commandes actives</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card info">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3>Producteurs suivis</h3>
+                            <div class="stat-value">8</div>
+                            <div class="stat-trend positive">+2 récemment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commandes récentes -->
+                <div class="recent-orders">
+                    <div class="section-header">
+                        <h3>Commandes récentes</h3>
+                        <button class="btn btn-outline" onclick="showSection('commandes')">
+                            Voir toutes les commandes
+                        </button>
+                    </div>
+                    
+                    <div class="orders-list">
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-id">#CMD-0024</span>
+                                <span class="order-status delivered">Livrée</span>
+                            </div>
+                            <div class="order-details">
+                                <div class="order-products">
+                                    <span>Tomates (2kg), Oignons (1kg), Piment (0.5kg)</span>
+                                </div>
+                                <div class="order-total">12,500 FCFA</div>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-date">15 Déc 2024</span>
+                                <button class="btn btn-sm btn-outline">Détails</button>
+                            </div>
+                        </div>
+                        
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-id">#CMD-0025</span>
+                                <span class="order-status delivery">En livraison</span>
+                            </div>
+                            <div class="order-details">
+                                <div class="order-products">
+                                    <span>Igname (5kg), Riz (3kg)</span>
+                                </div>
+                                <div class="order-total">18,200 FCFA</div>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-date">Aujourd'hui</span>
+                                <button class="btn btn-sm btn-primary">Suivre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions de produits -->
+                <div class="suggestions-section">
+                    <div class="section-header">
+                        <h3>Produits qui pourraient vous plaire</h3>
+                        <button class="btn btn-primary" onclick="showSection('recherche')">
+                            Voir le catalogue
+                        </button>
+                    </div>
+                    
+                    <div class="products-grid-mini">
+                        <!-- Produits suggérés dynamiques -->
+                        <div class="product-suggestion">
+                            <div class="suggestion-image"></div>
+                            <div class="suggestion-info">
+                                <h4>Maïs blanc frais</h4>
+                                <p class="suggestion-price">600 FCFA/kg</p>
+                                <p class="suggestion-producer">Ferme Bio Bounda</p>
+                                <button class="btn btn-sm btn-primary">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-suggestion">
+                            <div class="suggestion-image"></div>
+                            <div class="suggestion-info">
+                                <h4>Aubergines locales</h4>
+                                <p class="suggestion-price">750 FCFA/kg</p>
+                                <p class="suggestion-producer">Exploitation Brobo</p>
+                                <button class="btn btn-sm btn-primary">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Recherche/Catalogue (redirige vers le catalogue) -->
+            <section id="recherche" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🔍 Catalogue des Produits</h1>
+                    <p>Cette section redirige vers le catalogue complet</p>
+                    <button class="btn btn-primary" onclick="window.location.href='../../catalogue.html'">
+                        Aller au catalogue →
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section Favoris -->
+            <section id="favoris" class="dashboard-section">
+                <div class="section-header">
+                    <h1>❤️ Mes Favoris</h1>
+                    <p>Vos produits préférés</p>
+                </div>
+                <div id="favorisContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Aucun produit en favoris pour le moment.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Panier (intégrée) -->
+            <section id="panier" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🛒 Mon Panier</h1>
+                    <p>Gérez vos articles et passez commande</p>
+                </div>
+                <div id="panierDashboardContent">
+                    <!-- Le contenu du panier sera chargé ici par JavaScript -->
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Votre panier est vide. <a href="../../catalogue.html" style="color: #4a7c3a;">Parcourir le catalogue</a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Commandes -->
+            <section id="commandes" class="dashboard-section">
+                <div class="section-header">
+                    <h1>📦 Mes Commandes</h1>
+                    <p>Suivez l'état de vos commandes</p>
+                </div>
+                <div id="commandesContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Aucune commande pour le moment.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Messages -->
+            <section id="messages" class="dashboard-section">
+                <div class="section-header">
+                    <h1>💬 Messages</h1>
+                    <p>Vos conversations avec les producteurs</p>
+                </div>
+                <div id="messagesContent" class="messages-container">
+                    <!-- Liste des conversations -->
+                    <div class="conversations-list">
+                        <div class="conversations-header">
+                            <h3>Conversations</h3>
+                            <button class="btn-icon" onclick="loadConversations()" title="Actualiser">
+                                🔄
+                            </button>
+                        </div>
+                        <div id="conversationsList" class="conversations-items">
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                Chargement des conversations...
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Zone de dialogue -->
+                    <div class="chat-area">
+                        <!-- En-tête de la conversation -->
+                        <div class="chat-header" id="chatHeader">
+                            <div class="chat-header-info">
+                                <div class="chat-avatar">👤</div>
+                                <div>
+                                    <h3 id="chatUserName">Sélectionnez une conversation</h3>
+                                    <p id="chatUserRole" class="chat-subtitle">Producteur</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Messages -->
+                        <div class="messages-area" id="messagesArea">
+                            <div class="messages-empty">
+                                <div class="empty-icon">💬</div>
+                                <p>Sélectionnez une conversation pour commencer</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Zone de saisie -->
+                        <div class="message-input-container" id="messageInputContainer" style="display: none;">
+                            <!-- Aperçu image -->
+                            <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                                <div class="image-preview-wrapper">
+                                    <img id="imagePreview" src="" alt="Aperçu">
+                                    <button class="btn-remove-preview" onclick="removeImagePreview()">×</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Aperçu audio -->
+                            <div id="audioPreviewContainer" class="audio-preview-container" style="display: none;">
+                                <div class="audio-preview-wrapper">
+                                    <audio id="audioPreview" controls></audio>
+                                    <button class="btn-remove-preview" onclick="removeAudioPreview()">×</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Barre d'outils -->
+                            <div class="message-input-toolbar">
+                                <button class="btn-toolbar" onclick="triggerImageInput()" title="Envoyer une image">
+                                    📷
+                                </button>
+                                <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+                                
+                                <button class="btn-toolbar" id="voiceRecordBtn" onclick="toggleVoiceRecording()" title="Enregistrer un message vocal">
+                                    🎤
+                                </button>
+                                
+                                <div class="recording-indicator" id="recordingIndicator" style="display: none;">
+                                    <div class="recording-dot"></div>
+                                    <span id="recordingTime">00:00</span>
+                                    <button class="btn-stop-recording" onclick="stopRecording()">Arrêter</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Zone de texte -->
+                            <div class="message-input-wrapper">
+                                <textarea 
+                                    id="messageText" 
+                                    placeholder="Tapez votre message..." 
+                                    rows="1"
+                                    onkeydown="handleMessageKeydown(event)"
+                                    oninput="autoResizeTextarea(this)">
+                                </textarea>
+                                <button class="btn-send-message" onclick="sendMessage()" title="Envoyer">
+                                    ➤
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Notifications -->
+            <section id="notifications" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🔔 Mes Notifications</h1>
+                    <p>Restez informé de toutes vos activités</p>
+                </div>
+                <div id="notificationsContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">Chargement...</p>
+                </div>
+            </section>
+
+            <!-- Section Profil -->
+            <section id="mon-profil" class="dashboard-section">
+                <div class="section-header">
+                    <h1>👤 Mon Profil</h1>
+                    <p>Gérez vos informations personnelles</p>
+                </div>
+                <div id="profilContent" style="padding: 20px;">
+                    <!-- Les informations du profil seront chargées ici -->
+                </div>
+            </section>
+            
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/auth.js"></script>
+    <script src="../../scripts/auth-guard.js"></script>
+    <script src="../../scripts/messaging.js"></script>
+    <script src="../../scripts/dashboard-acheteur.js"></script>
+</body>
+</html>

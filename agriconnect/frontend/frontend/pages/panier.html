@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - AgriConnect</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/panier.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <img src="../../assets/images/logo.png.png" alt="AgriConnect Logo" class="logo">
+                    <h2>AgriConnect</h2>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="../../index.html" class="nav-link">Accueil</a>
+                <a href="../../catalogue.html" class="nav-link">Catalogue</a>
+                <a href="../../apropos.html" class="nav-link">À propos</a>
+                <a href="../../contact.html" class="nav-link">Contact</a>
+                
+                <div class="nav-auth" id="navAuth">
+                    <!-- Sera rempli par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Panier -->
+    <section class="panier-section">
+        <div class="container">
+            <div class="panier-header">
+                <h1>🛒 Votre Panier</h1>
+                <p class="section-description">Révisez vos articles et planifiez la livraison</p>
+            </div>
+
+            <div class="panier-content">
+                <!-- Colonne gauche - Articles du panier -->
+                <div class="panier-articles">
+                    <div class="articles-header">
+                        <h2>Articles sélectionnés</h2>
+                        <span class="articles-count" id="articlesCount">0 articles</span>
+                    </div>
+
+                    <div class="articles-list" id="articlesList">
+                        <!-- Les articles seront ajoutés ici par JavaScript -->
+                        <div class="empty-panier" id="emptyPanier">
+                            <div class="empty-icon">🛒</div>
+                            <h3>Votre panier est vide</h3>
+                            <p>Ajoutez des produits depuis le catalogue</p>
+                            <a href="../../catalogue.html" class="btn btn-primary">Parcourir le catalogue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite - Récapitulatif et livraison -->
+                <div class="panier-sidebar">
+                    <!-- Sélection de la commune -->
+                    <div class="commune-selection card">
+                        <h3>📍 Lieu de livraison</h3>
+                        <select id="selectCommune" class="form-select">
+                            <option value="">Choisissez votre commune</option>
+                            <option value="Bouaké-Ville">Bouaké-Ville</option>
+                            <option value="Bounda">Bounda</option>
+                            <option value="Brobo">Brobo</option>
+                            <option value="Djébonoua">Djébonoua</option>
+                            <option value="Sakassou">Sakassou</option>
+                            <option value="Béoumi">Béoumi</option>
+                            <option value="Botro">Botro</option>
+                        </select>
+                        <div class="frais-livraison" id="fraisLivraison">
+                            Frais de livraison: 0 FCFA
+                        </div>
+                    </div>
+
+                    <!-- Sélection de la date -->
+                    <div class="date-selection card">
+                        <h3>📅 Date de livraison</h3>
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button id="prevWeek" class="calendar-nav">◀</button>
+                                <span id="calendarTitle">Cette semaine</span>
+                                <button id="nextWeek" class="calendar-nav">▶</button>
+                            </div>
+                            <div class="calendar" id="calendar">
+                                <!-- Calendrier sera généré par JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sélection du créneau horaire -->
+                    <div class="horaire-selection card">
+                        <h3>🕒 Créneau horaire</h3>
+                        <div class="creneaux-grid" id="creneauxGrid">
+                            <!-- Créneaux seront générés par JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Récapitulatif de commande -->
+                    <div class="recap-commande card">
+                        <h3>💰 Récapitulatif</h3>
+                        <div class="recap-ligne">
+                            <span>Sous-total:</span>
+                            <span id="sousTotal">0 FCFA</span>
+                        </div>
+                        <div class="recap-ligne">
+                            <span>Frais de livraison:</span>
+                            <span id="fraisLivraisonTotal">0 FCFA</span>
+                        </div>
+                        <div class="recap-ligne total">
+                            <span>Total:</span>
+                            <span id="totalCommande">0 FCFA</span>
+                        </div>
+
+                        <!-- Mode de paiement -->
+                        <div class="paiement-section">
+                            <h4>💵 Mode de paiement</h4>
+                            <div class="paiement-option selected">
+                                <span class="paiement-icone">💵</span>
+                                <span class="paiement-text">Paiement en espèces à la livraison</span>
+                            </div>
+                        </div>
+
+                        <!-- Bouton de validation -->
+                        <button class="btn-commander" id="btnCommander">
+                             Commander maintenant
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/auth.js"></script>
+    <script src="../../scripts/panier.js"></script>
+</body>
+</html>

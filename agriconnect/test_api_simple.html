@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Simple</title>
+</head>
+<body>
+    <h1>Test de connexion API</h1>
+    <button onclick="testAPI()">Tester l'API</button>
+    <div id="result" style="margin-top: 20px; padding: 20px; border: 1px solid #ccc;"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Test en cours...';
+            
+            // Test 1: URL de base
+            const currentUrl = window.location.href;
+            const protocol = window.location.protocol;
+            const hostname = window.location.hostname;
+            const pathname = window.location.pathname;
+            
+            let apiBase = 'http://localhost/agriconnect/api';
+            
+            // Détecter automatiquement
+            if (pathname.includes('/agriconnect/')) {
+                const agriconnectIndex = pathname.indexOf('/agriconnect/');
+                const basePath = pathname.substring(0, agriconnectIndex + '/agriconnect'.length);
+                apiBase = `${protocol}//${hostname}${basePath}/api`;
+            }
+            
+            let info = `<h3>Informations de connexion:</h3>`;
+            info += `<p><strong>URL actuelle:</strong> ${currentUrl}</p>`;
+            info += `<p><strong>Protocole:</strong> ${protocol}</p>`;
+            info += `<p><strong>Hostname:</strong> ${hostname}</p>`;
+            info += `<p><strong>Pathname:</strong> ${pathname}</p>`;
+            info += `<p><strong>URL API détectée:</strong> ${apiBase}</p>`;
+            
+            if (protocol === 'file:') {
+                resultDiv.innerHTML = info + '<p style="color: red;"><strong>❌ ERREUR: Vous ouvrez cette page via file://</strong><br>Vous devez ouvrir via http://localhost/agriconnect/...</p>';
+                return;
+            }
+            
+            // Test 2: Tester l'endpoint index.php
+            const testUrl = `${apiBase}/index.php`;
+            info += `<h3>Test de connexion:</h3>`;
+            info += `<p><strong>URL testée:</strong> ${testUrl}</p>`;
+            resultDiv.innerHTML = info + '<p>Connexion en cours...</p>';
+            
+            try {
+                console.log('Test URL:', testUrl);
+                const response = await fetch(testUrl);
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
+                const text = await response.text();
+                console.log('Response text:', text);
+                
+                if (response.ok) {
+                    try {
+                        const data = JSON.parse(text);
+                        info += `<p style="color: green;"><strong>✅ SUCCÈS!</strong> L'API répond correctement.</p>`;
+                        info += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    } catch (e) {
+                        info += `<p style="color: orange;"><strong>⚠️ Réponse reçue mais pas en JSON:</strong></p>`;
+                        info += `<pre>${text}</pre>`;
+                    }
+                } else {
+                    info += `<p style="color: red;"><strong>❌ ERREUR HTTP ${response.status}</strong></p>`;
+                    info += `<pre>${text}</pre>`;
+                }
+            } catch (error) {
+                console.error('Erreur fetch:', error);
+                info += `<p style="color: red;"><strong>❌ ERREUR DE CONNEXION</strong></p>`;
+                info += `<p><strong>Type:</strong> ${error.name}</p>`;
+                info += `<p><strong>Message:</strong> ${error.message}</p>`;
+                info += `<p><strong>Vérifications:</strong></p>`;
+                info += `<ul>`;
+                info += `<li>Apache est-il démarré dans XAMPP ?</li>`;
+                info += `<li>Ouvrez-vous la page via http://localhost/... ?</li>`;
+                info += `<li>L'URL de l'API est-elle correcte ?</li>`;
+                info += `</ul>`;
+            }
+            
+            resultDiv.innerHTML = info;
+        }
+        
+        // Tester automatiquement au chargement
+        window.onload = function() {
+            testAPI();
+        };
+    </script>
+</body>
+</html>
+

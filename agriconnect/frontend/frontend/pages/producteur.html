@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Producteur - AgriConnect </title>
+
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/dashboard.css">
+    <link rel="stylesheet" href="../../styles/messages.css">
+</head>
+
+<body class="dashboard-page">
+    <!-- Navigation Dashboard -->
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+
+            <img src="../../assets/images/logo.png.png" alt="AgriConnect Bouaké" class="nav-logo"
+                onerror="this.src='https://via.placeholder.com/150x50/2d5016/ffffff?text=AgriConnect'">
+            <span class="brand-text">AgriConnect</span>
+        </div>
+
+        <div class="nav-user">
+            <div class="user-avatar">👨‍🌾</div>
+            <div class="user-info">
+                <span class="user-name" id="userName">Chargement...</span>
+                <span class="user-role">Producteur</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Layout Principal -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="../../index.html" class="nav-item"
+                    style="background: #f8f9fa; color: #4a7c3a; border-left: 3px solid #4a7c3a;">
+                    🏠 Revenir à l'accueil
+                </a>
+                <a href="#tableau-bord" class="nav-item active" data-section="tableau-bord">
+                    📊 Tableau de bord
+                </a>
+                <a href="#mes-produits" class="nav-item" data-section="mes-produits">
+                    🍅 Mes produits
+                </a>
+                <a href="#commandes" class="nav-item" data-section="commandes">
+                    📦 Commandes
+                </a>
+                <a href="#livraisons" class="nav-item" data-section="livraisons">
+                    🚚 Livraisons
+                </a>
+                <a href="#finances" class="nav-item" data-section="finances">
+                    💰 Finances
+                </a>
+                <a href="#messages" class="nav-item" data-section="messages">
+                    💬 Messages
+                </a>
+                <a href="#mon-profil" class="nav-item" data-section="mon-profil">
+                    👤 Mon profil
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="logout-btn">
+                    🚪 Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenu Principal -->
+        <main class="dashboard-main">
+            <!-- Section Tableau de Bord -->
+            <section id="tableau-bord" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>Tableau de Bord Producteur</h1>
+                    <p>Bienvenue sur votre espace de gestion</p>
+                </div>
+
+                <!-- Cartes Statistiques -->
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Chiffre d'Affaires</h3>
+                            <div class="stat-value">450,000 FCFA</div>
+                            <div class="stat-trend positive">+12% ce mois</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card success">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-content">
+                            <h3>Commandes en cours</h3>
+                            <div class="stat-value">8</div>
+                            <div class="stat-trend">+2 cette semaine</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card warning">
+                        <div class="stat-icon">🍅</div>
+                        <div class="stat-content">
+                            <h3>Produits actifs</h3>
+                            <div class="stat-value">15</div>
+                            <div class="stat-trend negative">-2 produits</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card info">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3>Note moyenne</h3>
+                            <div class="stat-value">4.5/5</div>
+                            <div class="stat-trend positive">+0.2</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <!-- Section Mes Produits -->
+            <section id="mes-produits" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Gestion des Produits</h1>
+                    <button class="btn btn-primary" onclick="showAddProductModal()">
+                        + Ajouter un produit
+                    </button>
+                </div>
+
+                <div class="products-management">
+                    <div class="management-header">
+                        <div class="search-box">
+                            <input type="text" placeholder="🔍 Rechercher un produit..." class="search-input">
+                        </div>
+                    </div>
+
+                    <div class="products-list">
+                        <div class="product-card">
+                            <div class="product-image"></div>
+                            <div class="product-info">
+                                <h4>Tomates locales</h4>
+                                <p class="product-price">800 FCFA/kg</p>
+                                <p class="product-stock">Stock: 42 kg</p>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-sm btn-outline">Modifier</button>
+                                <button class="btn btn-sm btn-danger">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Commandes -->
+            <section id="commandes" class="dashboard-section">
+                <div class="section-header">
+                    <h1>📦 Commandes</h1>
+                    <p>Gérez les commandes reçues pour vos produits</p>
+                </div>
+                <div id="commandesContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Aucune commande pour le moment.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Livraisons -->
+            <section id="livraisons" class="dashboard-section">
+                <div class="section-header">
+                    <h1>🚚 Livraisons</h1>
+                    <p>Suivez l'état de vos livraisons</p>
+                </div>
+                <div id="livraisonsContent">
+                    <p style="text-align: center; color: #7f8c8d; padding: 40px;">
+                        Aucune livraison en cours.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Finances -->
+            <section id="finances" class="dashboard-section">
+                <div class="section-header">
+                    <h1>💰 Finances</h1>
+                    <p>Consultez vos revenus et statistiques financières</p>
+                </div>
+                <div id="financesContent">
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-content">
+                                <h3>Revenus ce mois</h3>
+                                <div class="stat-value" id="revenusMois">0 FCFA</div>
+                            </div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <h3>Revenus total</h3>
+                                <div class="stat-value" id="revenusTotal">0 FCFA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Messages -->
+            <section id="messages" class="dashboard-section">
+                <div class="section-header">
+                    <h1>💬 Messages</h1>
+                    <p>Vos conversations avec les acheteurs</p>
+                </div>
+                <div id="messagesContent" class="messages-container">
+                    <!-- Liste des conversations -->
+                    <div class="conversations-list">
+                        <div class="conversations-header">
+                            <h3>Conversations</h3>
+                            <button class="btn-icon" onclick="loadConversations()" title="Actualiser">
+                                🔄
+                            </button>
+                        </div>
+                        <div id="conversationsList" class="conversations-items">
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                Chargement des conversations...
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Zone de dialogue -->
+                    <div class="chat-area">
+                        <!-- En-tête de la conversation -->
+                        <div class="chat-header" id="chatHeader">
+                            <div class="chat-header-info">
+                                <div class="chat-avatar">👤</div>
+                                <div>
+                                    <h3 id="chatUserName">Sélectionnez une conversation</h3>
+                                    <p id="chatUserRole" class="chat-subtitle">Acheteur</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Messages -->
+                        <div class="messages-area" id="messagesArea">
+                            <div class="messages-empty">
+                                <div class="empty-icon">💬</div>
+                                <p>Sélectionnez une conversation pour commencer</p>
+                            </div>
+                        </div>
+
+                        <!-- Zone de saisie -->
+                        <div class="message-input-container" id="messageInputContainer" style="display: none; padding: 15px; border-top: 1px solid #e0e0e0; background: white;">
+                            <!-- Barre d'outils -->
+                            <div class="message-input-toolbar" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <button class="btn-toolbar" onclick="triggerImageInput()" title="Envoyer une image" style="background: none; border: 1px solid #ddd; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 18px;">
+                                    📷
+                                </button>
+                                <input type="file" id="imageInput" accept="image/*" style="display: none;"
+                                    onchange="handleImageSelect(event)">
+
+                                <button class="btn-toolbar" id="voiceRecordBtn" onclick="toggleVoiceRecording()" title="Enregistrer un message vocal" style="background: none; border: 1px solid #ddd; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 18px;">
+                                    🎤
+                                </button>
+
+                                <div class="recording-indicator" id="recordingIndicator" style="display: none;">
+                                    <div class="recording-dot"></div>
+                                    <span id="recordingTime">00:00</span>
+                                    <button class="btn-stop-recording" onclick="stopRecording()">Arrêter</button>
+                                </div>
+                            </div>
+
+                            <!-- Zone de texte -->
+                            <div class="message-input-wrapper" style="display: flex; gap: 10px; align-items: flex-end;">
+                                <textarea id="messageText" placeholder="Écrivez votre réponse..." rows="1" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: Arial; font-size: 14px; resize: none; box-sizing: border-box;"
+                                    onkeydown="handleMessageKeydown(event)" oninput="autoResizeTextarea(this)">
+                                </textarea>
+                                <button class="btn-send-message" onclick="sendMessage()" title="Envoyer" style="background: #ff9800; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; white-space: nowrap;">
+                                    📨 Envoyer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Profil -->
+            <section id="mon-profil" class="dashboard-section">
+                <div class="section-header">
+                    <h1>👤 Mon Profil</h1>
+                    <p>Gérez vos informations personnelles</p>
+                </div>
+                <div id="profilContent" style="padding: 20px;">
+                    <!-- Les informations du profil seront chargées ici -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Ajout Produit -->
+    <div id="addProductModal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; overflow-y: auto; background: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="modal-content" onclick="event.stopPropagation();"
+            style="max-width: 600px; margin: auto; background: white; border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative; z-index: 10001; pointer-events: auto !important;">
+            <div class="modal-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e1e8ed; padding-bottom: 15px;">
+                <h2 style="color: #2d5016; margin: 0;">🍅 Ajouter un nouveau produit</h2>
+                <button onclick="closeAddProductModal()"
+                    style="background: none; border: none; font-size: 24px; cursor: pointer; color: #7f8c8d; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;"
+                    onmouseover="this.style.background='#f0f0f0'; this.style.color='#e74c3c';"
+                    onmouseout="this.style.background='none'; this.style.color='#7f8c8d';">
+                    ×
+                </button>
+            </div>
+
+            <form id="addProductForm"
+                onsubmit="if(typeof handleAddProduct === 'function') { handleAddProduct(event); return false; } else { alert('❌ Erreur: Fonction handleAddProduct non trouvée. Vérifiez la console.'); console.error('handleAddProduct non définie'); return false; }">
+                <div style="display: grid; gap: 20px;">
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Nom du
+                            produit *</label>
+                        <input type="text" id="productName" name="nom" required placeholder="Ex: Tomates locales"
+                            style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; pointer-events: auto !important; position: relative; z-index: 10002;"
+                            onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Description</label>
+                        <textarea id="productDescription" name="description" rows="3"
+                            placeholder="Décrivez votre produit (optionnel)"
+                            style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; resize: vertical; transition: border-color 0.3s; pointer-events: auto !important; position: relative; z-index: 10002;"
+                            onfocus="this.style.borderColor='#4a7c3a';"
+                            onblur="this.style.borderColor='#e1e8ed';"></textarea>
+                    </div>
+
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Photo du
+                            produit</label>
+                        <div style="display: grid; gap: 15px;">
+                            <input type="file" id="productImage" name="image" accept="image/*" style="display: none;"
+                                onchange="handleImageSelect(event)">
+                            <button type="button" onclick="document.getElementById('productImage').click()"
+                                class="btn btn-outline"
+                                style="width: 100%; padding: 12px; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                📷 Choisir une photo depuis la galerie
+                            </button>
+
+                            <!-- Aperçu de l'image sélectionnée -->
+                            <div id="imagePreview" style="display: none; margin-top: 10px;">
+                                <div style="position: relative; display: inline-block; width: 100%; max-width: 300px;">
+                                    <img id="previewImg" src="" alt="Aperçu"
+                                        style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e1e8ed;">
+                                    <button type="button" onclick="removeImagePreview()"
+                                        style="position: absolute; top: 5px; right: 5px; background: rgba(231, 76, 60, 0.9); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;"
+                                        onmouseover="this.style.background='rgba(231, 76, 60, 1)'"
+                                        onmouseout="this.style.background='rgba(231, 76, 60, 0.9)'">
+                                        ×
+                                    </button>
+                                </div>
+                                <p id="imageFileName" style="margin-top: 8px; font-size: 14px; color: #7f8c8d;"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Prix
+                                (FCFA) *</label>
+                            <input type="number" id="productPrice" name="prix" required min="1" step="50"
+                                placeholder="Ex: 800"
+                                style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s;"
+                                onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Stock
+                                *</label>
+                            <input type="number" id="productStock" name="stock" required min="0" step="1"
+                                placeholder="Ex: 50"
+                                style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s;"
+                                onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Unité
+                                *</label>
+                            <select id="productUnite" name="unite" required
+                                style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s;"
+                                onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                                <option value="kg">kg (kilogramme)</option>
+                                <option value="g">g (gramme)</option>
+                                <option value="L">L (litre)</option>
+                                <option value="mL">mL (millilitre)</option>
+                                <option value="pièce">Pièce</option>
+                                <option value="sachet">Sachet</option>
+                                <option value="botte">Botte</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Commune
+                                *</label>
+                            <select id="productCommune" name="commune" required
+                                style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s;"
+                                onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                                <option value="Bouaké-Ville">Bouaké-Ville</option>
+                                <option value="Bounda">Bounda</option>
+                                <option value="Brobo">Brobo</option>
+                                <option value="Djébonoua">Djébonoua</option>
+                                <option value="Sakassou">Sakassou</option>
+                                <option value="Béoumi">Béoumi</option>
+                                <option value="Botro">Botro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="display: block; font-weight: 600; color: #2d5016; margin-bottom: 8px;">Catégorie
+                            *</label>
+                        <select id="productCategorie" name="categorie_id" required
+                            style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px; font-size: 16px; transition: border-color 0.3s;"
+                            onfocus="this.style.borderColor='#4a7c3a';" onblur="this.style.borderColor='#e1e8ed';">
+                            <option value="">Chargement des catégories...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div
+                    style="display: flex; gap: 15px; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e1e8ed;">
+                    <button type="submit" class="btn btn-primary"
+                        style="flex: 1; padding: 12px; font-size: 16px; font-weight: 600;">
+                        ✅ Ajouter le produit
+                    </button>
+                    <button type="button" onclick="closeAddProductModal()" class="btn btn-outline"
+                        style="flex: 1; padding: 12px; font-size: 16px;">
+                        Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- L'overlay est intégré dans le modal, pas besoin d'un élément séparé -->
+
+    <!-- CHEMINS SCRIPTS CORRIGÉS -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/auth.js"></script>
+    <script src="../../scripts/auth-guard.js"></script>
+    <script src="../../scripts/messaging.js"></script>
+    <script src="../../scripts/dashboard-producteur.js"></script>
+</body>
+
+</html>

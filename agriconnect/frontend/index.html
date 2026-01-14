@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriConnect  - Plateforme Agricole</title>
+    <!-- Je lie les fichiers CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Barre de navigation - Comme un menu de restaurant -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo et nom du site -->
+            <div class="nav-logo">
+                <img src="assets/images/logo.png.png" alt="AgriConnect Logo" class="logo">
+                <h2>AgriConnect </h2>
+            </div>
+            
+            <!-- Menu de navigation -->
+            <div class="nav-menu" id="navMenu">
+                <a href="#accueil" class="nav-link">Accueil</a>
+                <a href="catalogue.html" class="nav-link">Catalogue</a>
+                <a href="apropos.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <!-- Section connexion/inscription qui change selon si on est connecté -->
+                <div class="nav-auth" id="navAuth">
+                    <!-- Si pas connecté, montre boutons connexion/inscription -->
+                    <button onclick="redirectToLogin()" class="btn btn-outline">Connexion</button>
+                    <button onclick="redirectToRegister()" class="btn btn-primary">Inscription</button>
+                </div>
+            </div>
+            
+            <!-- Menu hamburger pour mobile -->
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section hero - La première chose que les visiteurs voient -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>🌿 Bienvenue sur AgriConnect </h1>
+            <p class="hero-subtitle">La première plateforme de mise en relation entre producteurs locaux et acheteurs dans la région de Bouaké. <strong>Connectez-vous directement</strong> avec les producteurs de votre région pour des produits <strong>frais, locaux et de qualité</strong>. Commandez en toute simplicité et recevez votre livraison chez vous ! 🚚</p>
+            
+            <!-- Statistiques pour montrer l'activité -->
+            <div class="hero-stats" id="heroStats" style="display: none;">
+                <div class="stat">
+                    <span class="stat-number" id="totalProducts">16</span>
+                    <span class="stat-label">Produits disponibles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalProducers">5</span>
+                    <span class="stat-label">Producteurs actifs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalOrders">0</span>
+                    <span class="stat-label">Commandes traitées</span>
+                </div>
+            </div>
+            
+            <!-- Boutons d'action principaux -->
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large" onclick="redirectToCatalogue()">
+                    🛒 Voir le catalogue
+                </button>
+                <button class="btn btn-secondary btn-large" onclick="redirectToRegister()">
+                    👨‍🌾 Devenir producteur
+                </button>
+            </div>
+        </div>
+        
+        <!-- Image illustrative -->
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop&crop=center" 
+                 alt="Producteur local de Bouaké - Agriculture locale" 
+                 onerror="this.src='https://via.placeholder.com/800x600/2d5016/ffffff?text=🌾+Agriculture+Locale'"
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        </div>
+    </section>
+
+  <!-- Section produits populaires -->
+<section id="produits-populaires" class="produits-populaires">
+    <div class="container">
+        <h2>🍅 Produits vivriers populaires à Bouaké</h2>
+        <p class="section-description">Découvrez une sélection de nos meilleurs produits locaux, frais, de saison et cultivés par nos producteurs partenaires. De la terre à votre table ! 🌾</p>
+        
+        <!-- Carrousel de produits -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="prevSlide()">‹</button>
+            
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Les produits vont être chargés ici par JavaScript -->
+                    <div class="loading-message">Chargement des produits...</div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn next-btn" onclick="nextSlide()">›</button>
+        </div>
+        
+        <!-- Indicateurs de slide -->
+        <div class="carousel-indicators" id="carouselIndicators">
+            <!-- Les indicateurs seront générés par JavaScript -->
+        </div>
+        
+        <div class="text-center" style="margin-top: 2rem;">
+            <button class="btn btn-outline" onclick="redirectToCatalogue()">
+                Voir tous les produits →
+            </button>
+        </div>
+    </div>
+</section>
+
+    <!-- Section comment ça marche -->
+    <section id="fonctionnement" class="fonctionnement">
+        <div class="container">
+            <h2>📋 Comment ça marche ?</h2>
+            <p class="section-description">Rejoignez notre communauté de producteurs et consommateurs engagés en quelques étapes simples. C'est rapide, facile et sécurisé ! ✨</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Inscription simple</h3>
+                    <p>Créez votre compte en 2 minutes, choisissez votre rôle (acheteur ou producteur)</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Producteurs : Publiez</h3>
+                    <p>Ajoutez vos produits avec photos, prix et stock. Gérez votre exploitation depuis un seul endroit.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Acheteurs : Commandez</h3>
+                    <p>Parcourez le catalogue, ajoutez au panier et commandez avec livraison dans toute Bouaké.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Livraison suivie</h3>
+                    <p>Suivez votre commande en temps réel jusqu'à la livraison à votre domicile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section communes desservies -->
+    <section id="communes" class="communes">
+        <div class="container">
+            <h2>📍 Nous livrons dans toute la région de Bouaké</h2>
+            <p class="section-description">Un service de livraison rapide et fiable dans toutes les communes environnantes. Votre commande vous sera livrée fraîche et soignée ! 📦</p>
+            <div class="communes-grid">
+                <div class="commune-card">
+                    <h4>🏙️ Bouaké-Ville</h4>
+                    <p>Livraison : 1 000 FCFA</p>
+                </div>
+                <div class="commune-card">
+                    <h4>📍 Bounda</h4>
+                    <p>Livraison : 1 500 FCFA</p>
+                </div>
+                <div class="commune-card">
+                    <h4>🌾 Brobo</h4>
+                    <p>Livraison : 1 800 FCFA</p>
+                </div>
+                <div class="commune-card">
+                    <h4>🚜 Djébonoua</h4>
+                    <p>Livraison : 1 700 FCFA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Dashboard (visible uniquement si connecté) -->
+    <section id="dashboard-section" class="dashboard-home-section" style="display: none;">
+        <div class="container">
+            <div class="dashboard-home-card">
+                <h2>📊 Mon Tableau de Bord</h2>
+                <p class="section-description">Accédez à votre espace personnel selon votre rôle</p>
+                <div id="dashboardContent">
+                    <!-- Le contenu du dashboard sera chargé ici par JavaScript -->
+                </div>
+                <div class="dashboard-actions" style="margin-top: 20px;">
+                    <button id="goToDashboardBtn" class="btn btn-primary btn-large" onclick="goToUserDashboard()">
+                        Accéder à mon tableau de bord →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="assets/images/logo.png.png" alt="AgriConnect" class="footer-logo">
+                    <p>Plateforme de mise en relation agricole à Bouaké</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <a href="catalogue.html">Catalogue</a>
+                    <a href="apropos.html">À propos</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Communes</h4>
+                    <span>Bouaké-Ville</span>
+                    <span>Bounda</span>
+                    <span>Brobo</span>
+                    <span>Djébonoua</span>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 +225 07 19 19 19 74</p>
+                    <p>📧 contact@agriconnect.ci</p>
+                    <p>📍 Bouaké, Vallée du Bandama</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgriConnect Bouaké. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Je lie les fichiers JavaScript -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+</html>   
